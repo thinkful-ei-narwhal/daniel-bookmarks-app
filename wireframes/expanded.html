@@ -7,7 +7,54 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bookmarks App</title>
 </head>
-<body>
-  <main></main>
+<body class="fade-in">
+  <h1>My Bookmarks</h1>
+  <main>
+    <div class="buttons-menus">
+      <div class="new-bookmark">
+        <button type="button" class="new-button">+ New</button>
+      </div>
+      <div class="filter">
+        <form id="filter-by">
+          <fieldset>
+            <div class="fix">
+            <label for="select-filter">Filter By</label>
+            <select id="select-filter">
+              <option value="minimum-rating">Min Rating</option>
+              <option value="maximum-rating">Max Rating</option>
+              <option value="alphabetic-az">A - Z</option>
+              <option value="reverse-alphabetic">Z - A</option>
+              </select>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="bookmark-list">
+      <ul class="list">
+        <li class="js-item-element" data-item-id="1">
+          <div class="new-bookmark">
+            <button type="button">Title 1</button> <button type="button">X</button>
+            <div class="description-container">
+              <button type="button" class="link">Visit Site</button> <span>5</span>
+              <div class="description">
+                <p>here is a description.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="js-item-element" data-item-id="2">
+          <div class="new-bookmark">
+            <button type="button"><span>Title 2</span><span>* * * *</span> </button>
+          </div>
+        </li>
+        <li class="js-item-element" data-item-id="3">
+          <div class="new-bookmark">
+            <button type="button"><span>Title 2</span><span>* * * *</span> </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </main>
 </body>
 </html>
