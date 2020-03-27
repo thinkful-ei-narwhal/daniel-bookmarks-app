@@ -210,12 +210,39 @@ select {
   border-radius: 0px;
 }
 
-
 /* -----EXPANDED------*/
 
+.description-container {
+  width: 300px;
+  padding: 10px;
+  background-color: rgb(255, 254, 254);
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+}
 
+.selected {
+  color: white;
+  background-color:rgb(111, 187, 197);
+  transition: 0.25s;
+}
 
+.selected:hover {
+  color: rgb(95, 95, 95);
+}
 
+p {
+  font-style: italic;
+  color: rgb(155, 155, 155);
+  font-size: 12px;
+}
+
+p::before {
+  content: open-quote;
+}
+
+p::after {
+  content: close-quote;
+}
 
 .js-item-element {
   display: flex;
@@ -231,6 +258,23 @@ fieldset {
   border: none;
 }
 
+.link-button {
+  color: rgb(95, 95, 95);
+  background-color: rgb(255, 254, 254);
+  border-radius: 4px;
+}
+
+.link-button:hover {
+  background-color:rgb(245, 252, 253);
+  transition: 0.25s;
+}
+
+.link-button:active{
+  background-color:rgb(36, 229, 255);
+  transition: 0.25s;
+}
+
+/* Screen Adjustments */
 
 @media (min-width: 700px) { /* Medium Screen */
   
