@@ -7,7 +7,32 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bookmarks App</title>
 </head>
-<body>
-  <main></main>
+<body class="fade-in">
+  <h1>My Bookmarks</h1>
+  <main>
+    <form id="bookmark-form">
+      <label for="bookmark-url">Add New Bookmark URL:</label><br>
+      <input type="text" id="bookmark-url" name="bookmark-form" placeholder="http://google.com"><br>
+      <label for="bookmark-title">Title:</label><br>
+      <input type="text" id="bookmark-title" name="bookmark-form" placeholder="Google"><br>
+      <div class="rate">
+        <input type="radio" id="star5" name="bookmark-form" value="5" />
+        <label for="star5" title="text">5 stars</label>
+        <input type="radio" id="star4" name="bookmark-form" value="4" />
+        <label for="star4" title="text">4 stars</label>
+        <input type="radio" id="star3" name="bookmark-form" value="3" />
+        <label for="star3" title="text">3 stars</label>
+        <input type="radio" id="star2" name="bookmark-form" value="2" />
+        <label for="star2" title="text">2 stars</label>
+        <input type="radio" id="star1" name="bookmark-form" value="1" />
+        <label for="star1" title="text">1 star</label>
+      </div>
+      <textarea id="bookmark-description" placeholder="A description (optional)"></textarea><br>
+      <div class="bottom-buttons">
+        <button type="button" class="cancel-button">Cancel</button>
+        <input type="submit" class="submit-button" value="Submit">
+      </div>
+    </form>
+  </main>
 </body>
 </html>
