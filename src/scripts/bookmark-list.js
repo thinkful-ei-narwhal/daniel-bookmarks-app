@@ -198,17 +198,17 @@ const render = function() {
 
 const createItemSubmitListener = function() {
 
-  $('main').on('click', '#bookmark-form', event => {
+  $('main').on('submit', '#bookmark-form', event => {
     event.preventDefault();
-    $('#bookmark-form').fn.extend({
-      serializeJson: function() {
-        const formData = new FormData(this[0]);
-        const o = {};
-        formData.forEach((val, name) => o[name] = val);
-        return JSON.stringify(o);
-      }
-    });
-    const newBookmarkThings = $(event.target).serializeJson();
+    // $('#bookmark-form').fn.extend({
+    //   serializeJson: function() {
+    //     const formData = new FormData(this[0]);
+    //     const o = {};
+    //     formData.forEach((val, name) => o[name] = val);
+    //     return JSON.stringify(o);
+    //   }
+    // });
+    const newBookmarkThings = $(event.target).val(); //.serializeJson();
     console.log(newBookmarkThings);
 
     api.createBookmark(newBookmarkThings)

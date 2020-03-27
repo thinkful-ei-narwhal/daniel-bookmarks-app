@@ -23,11 +23,11 @@ const getBookmarks = function() {
 };
 
 const createBookmark = function(item) {
-  const newItem = JSON.stringify(item);
-
+  const newBookmark = JSON.stringify(item);
+  console.log(newBookmark);
   const options = {
     method: 'POST',
-    body: newItem
+    body: newBookmark
   };
   return apiFetch(`${BASE_URL}/bookmarks`, options);
 };
