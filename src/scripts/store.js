@@ -8,20 +8,20 @@ function setError(err) {
 }
 
 function findById(id) {
-  return this.items.find(item => item.id === id);
+  return this.bookmarks.find(bookmark => bookmark.id === id);
 }
 
-function addItem(item) {
-  this.items.push(item);
+function addItem(bookmark) {
+  this.bookmarks.push(bookmark);
 }
 
 function findAndUpdate(id, newData) {
-  const item = this.findById(id);
-  Object.assign(item, newData);
+  const bookmark = this.findById(id);
+  Object.assign(bookmark, newData);
 }
 
 function findAndDelete(id) {
-  this.items = this.items.filter(item => item.id !== id);
+  this.bookmarks = this.bookmarks.filter(item => item.id !== id);
 }
 
 function applyFilter(filter) {
