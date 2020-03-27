@@ -9,6 +9,8 @@ body {
   color: rgb(95, 95, 95);
 }
 
+/* -----BOOKMARK FORM------*/
+
 #bookmark-form {
   text-align: center;
   display: flex;
@@ -24,13 +26,14 @@ body {
   padding: 10px;
 }
 
-input[type=text] { /* Change to Class*/
+#bookmark-url, #bookmark-title { 
   border: 1px solid rgb(116, 116, 116);
   border-radius: 4px;
   padding: 3px;
+  width: 200px;
 }
 
-button[type=button], input[type=submit] { /* Change to Class*/
+.cancel-button, .submit-button { 
   
   display: inline;
   border-radius: 10px;
@@ -44,19 +47,19 @@ button[type=button], input[type=submit] { /* Change to Class*/
   margin-right: auto;
 }
 
-button[type=button]:hover { /* Change to Class*/
+.cancel-button:hover { 
   color: rgb(240, 240, 240);
   background-color: rgb(226, 96, 96);
   transition: 0.25s;
 }
 
-input[type=submit]:hover { /* Change to Class*/
+.submit-button:hover { 
   color: rgb(240, 240, 240);
   background-color: rgb(48, 116, 50);
   transition: 0.25s;
 }
 
-input[type=text]:hover { /* Change to Class*/
+#bookmark-url:hover, #bookmark-title:hover { 
   background-color:rgb(245, 252, 253);
   transition: 0.25s;
 }
@@ -66,17 +69,15 @@ textarea:hover {
   transition: 0.25s;
 }
 
-input[type=text] { /* Change to Class*/
-  width: 200px;
-}
-
 textarea {
   height: 200px;
   width: 300px;
 }
 
+/* -----Italic Placeholder------*/
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: rgb(206, 206, 206);;
+  color: rgb(206, 206, 206);
   font-style: italic;
 }
 
@@ -95,9 +96,96 @@ textarea {
   font-style: italic;
 }
 
-.fix {
-  display: flex;
-  flex-direction: column;
+/* -----INITIAL------*/
+
+.button-item {
+  width: 300px;
+  height: 35px;
+  margin: 2px;
+  background-color: rgb(255, 254, 254);
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  color: grey;
+  text-align: left;
+  font-size: 16px;
+  word-wrap: normal;
+}
+
+.button-item:hover {
+  background-color:rgb(245, 252, 253);
+  transition: 0.25s;
+}
+
+.button-item:active{
+  background-color:rgb(36, 229, 255);
+  transition: 0.25s;
+}
+
+.rating-1::after {
+  font-size: 12px;
+  margin-left: 5px;
+  content: '★ ';
+}
+
+.rating-2::after {
+  font-size: 12px;
+  margin-left: 5px;
+  content: '★ ★ ';
+}
+
+.rating-3::after {
+  font-size: 12px;
+  margin-left: 5px;
+  content: '★ ★ ★ ';
+}
+
+.rating-4::after {
+  font-size: 12px;
+  margin-left: 5px;
+  content: '★ ★ ★ ★ ';
+}
+
+.rating-5::after {
+  font-size: 12px;
+  margin-left: 5px;
+  content: '★ ★ ★ ★ ★ ';
+}
+
+.new-bookmark, .filter {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 0px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+}
+
+.filter {
+  background-color: rgb(255, 254, 254);
+}
+
+.new-button {
+  border: none;
+  border-radius: 4px;
+  color: rgb(95, 95, 95);
+  font-size: 18px;
+  background-color: rgb(255, 254, 254);
+  width: 100%;
+  height: 100%;
+}
+
+.new-button:hover {
+  background-color:rgb(245, 252, 253);
+  transition: 0.25s;
+}
+
+.filter:hover, select:hover {
+  background-color:rgb(245, 252, 253);
+  transition: 0.25s;
+}
+
+.new-button:active{
+  background-color:rgb(36, 229, 255);
+  transition: 0.25s;
 }
 
 .buttons-menus {
@@ -106,6 +194,28 @@ textarea {
   justify-content: space-between;
   justify-content: center;
 }
+
+.fix {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  justify-self: center;
+}
+
+select {
+  color: rgb(95, 95, 95);
+  background-color: rgb(255, 254, 254);
+  border-radius: 0px;
+}
+
+
+/* -----EXPANDED------*/
+
+
+
+
 
 .js-item-element {
   display: flex;
