@@ -11,7 +11,7 @@ function findById(id) {
   return this.bookmarks.find(bookmark => bookmark.id === id);
 }
 
-function addItem(bookmark) {
+function addBookmark(bookmark) {
   this.bookmarks.push(bookmark);
 }
 
@@ -36,7 +36,7 @@ export default {
   error,
   setError,
   findById,
-  addItem,
+  addBookmark,
   findAndDelete,
   applyFilter,
   findAndUpdate,

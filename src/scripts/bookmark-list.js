@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import cuid from 'cuid';
 import api from './api';
 import store from './store';
 
@@ -152,15 +153,15 @@ const formRender = function() {
   <label for="bookmark-title">Title:</label><br>
   <input type="text" id="bookmark-title" name="bookmark-form" placeholder="Google"><br>
   <div class="rate">
-    <input type="radio" id="star5" name="bookmark-form" value="5" />
+    <input type="radio" id="star5" name="bookmark-rating" value="5" />
     <label for="star5" title="text">5 stars</label>
-    <input type="radio" id="star4" name="bookmark-form" value="4" />
+    <input type="radio" id="star4" name="bookmark-rating" value="4">
     <label for="star4" title="text">4 stars</label>
-    <input type="radio" id="star3" name="bookmark-form" value="3" />
+    <input type="radio" id="star3" name="bookmark-rating" value="3">
     <label for="star3" title="text">3 stars</label>
-    <input type="radio" id="star2" name="bookmark-form" value="2" />
+    <input type="radio" id="star2" name="bookmark-rating" value="2">
     <label for="star2" title="text">2 stars</label>
-    <input type="radio" id="star1" name="bookmark-form" value="1" />
+    <input type="radio" id="star1" name="bookmark-rating" value="1">
     <label for="star1" title="text">1 star</label>
   </div>
   <textarea id="bookmark-description" placeholder="A description (optional)"></textarea><br>
@@ -200,16 +201,18 @@ const createItemSubmitListener = function() {
 
   $('main').on('submit', '#bookmark-form', event => {
     event.preventDefault();
-    // $('#bookmark-form').fn.extend({
-    //   serializeJson: function() {
-    //     const formData = new FormData(this[0]);
-    //     const o = {};
-    //     formData.forEach((val, name) => o[name] = val);
-    //     return JSON.stringify(o);
-    //   }
-    // });
-    const newBookmarkThings = $(event.target).val(); //.serializeJson();
-    console.log(newBookmarkThings);
+    
+    const url= $('#bookmark-form input[id=bookmark-url').val();
+    const title= $('#bookmark-form input[id=bookmark-title').val();
+    const rating= $('#bookmark-form input[name=bookmark-rating').val(); // is always 5...
+    const desc= $('#bookmark-form textarea[id=bookmark-description').val();
+
+    const newBookmarkThings = {
+      title,
+      url,
+      desc,
+      rating
+    };
 
     api.createBookmark(newBookmarkThings)
       .then((newBookmark) => {
@@ -245,7 +248,12 @@ const itemDeleteClickListener = function() {
 };
 
 const cancelFormClickListener = function() {
-
+  $('main').on('click', '.cancel-button', event => {
+    console.log('clicked!');
+    event.preventDefault();
+    store.adding = false;
+    render();
+  });
 };
 
 const handleErrorExitClick = function() {

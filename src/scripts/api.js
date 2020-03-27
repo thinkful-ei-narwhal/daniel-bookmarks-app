@@ -27,6 +27,7 @@ const createBookmark = function(item) {
   console.log(newBookmark);
   const options = {
     method: 'POST',
+    headers: {'content-type': 'application/json'},
     body: newBookmark
   };
   return apiFetch(`${BASE_URL}/bookmarks`, options);
@@ -36,6 +37,7 @@ const updateBookmark = function (id, updateData){
   const newData = JSON.stringify(updateData);
   const options = {
     method: 'PATCH',
+    headers: {'content-type': 'application/json'},
     body: newData
   };
   return apiFetch(`${BASE_URL}/bookmarks/${id}`, options);
