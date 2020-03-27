@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import cuid from 'cuid';
 import api from './api';
 import store from './store';
 
@@ -36,36 +35,31 @@ const generateMenuButtons = function() {
           </fieldset>
         </form>
       </div>
-    </div>
-    <div class="bookmark-list">
-      <ul class="list">
-  `;
+    </div>`;
 };
 
 const generateBookmarkElement = function(bookmark) { // takes a bookmark object
   if (!bookmark.expanded) {
     return `
-  <li class="js-item-element" data-item-id="${bookmark.id}">
-    <div class="bookmark-item">
-       <button type="button" class="button-item rating-${bookmark.rating}">${bookmark.title}</button>
-    </div>
-  </li>
-  `;
+      <li class="js-item-element" data-item-id="${bookmark.id}">
+        <div class="bookmark-item">
+          <button type="button" class="button-item rating-${bookmark.rating}">${bookmark.title}</button>
+        </div>
+      </li>`;
   } else { // do I need to include bookmark.url in this somehow?  it'd be nice....
     return `
-    <li class="js-item-element" data-item-id="${bookmark.id}">
-    <div class="bookmark-item">
-      <button type="button" class="button-item selected">${bookmark.title}/button>
-      <div class="description-container">
-        <button type="button" class="link-button rating-${bookmark.rating}">Visit Site</button> 
-        <button type="button" class="button-delete">X</button>
-        <div class="description">
-          <p>${bookmark.description}</p>
+      <li class="js-item-element" data-item-id="${bookmark.id}">
+        <div class="bookmark-item">
+          <button type="button" class="button-item selected">${bookmark.title}/button>
+            <div class="description-container">
+              <button type="button" class="link-button rating-${bookmark.rating}">Visit Site</button> 
+              <button type="button" class="button-delete">X</button>
+              <div class="description">
+                <p>${bookmark.desc}</p>
+              </div>
+            </div>
         </div>
-      </div>
-    </div>
-    </li>
-    `;
+      </li>`;
   }
 };
 
@@ -120,7 +114,14 @@ const generateBookmarkItemsString = function(bookmarkList) {
 
   const items = bookmarkList.map(bookmark => generateBookmarkElement(bookmark));
 
-  return items.join('');
+  let joined = items.join('');
+
+  const final = (`
+  <div class="bookmark-list">
+    <ul class="list">` + joined + `
+    </ul>
+  </div>`);
+  return final;
 };
 
 const generateErrorHTML = function(error) {
@@ -182,6 +183,7 @@ const render = function() {
     const bookmarkListItemsString = generateBookmarkItemsString(bookmarks);
     // now they have a baby
     const fullString = `${menuString} ${bookmarkListItemsString}`;
+    console.log(fullString);
     // insert that HTML into the DOM
     $('main').html(fullString);
   } else {
@@ -202,16 +204,16 @@ const createItemSubmitListener = function() {
   $('main').on('submit', '#bookmark-form', event => {
     event.preventDefault();
     
-    const url= $('#bookmark-form input[id=bookmark-url').val();
-    const title= $('#bookmark-form input[id=bookmark-title').val();
-    const rating= $('#bookmark-form input[name=bookmark-rating').val(); // is always 5...
-    const desc= $('#bookmark-form textarea[id=bookmark-description').val();
+    const url = $('#bookmark-form input[id=bookmark-url').val();
+    const title = $('#bookmark-form input[id=bookmark-title').val();
+    const rating = $('#bookmark-form input[name=bookmark-rating').val(); // is always 5...
+    const desc = $('#bookmark-form textarea[id=bookmark-description').val();
 
     const newBookmarkThings = {
       title,
       url,
       desc,
-      rating
+      rating,
     };
 
     api.createBookmark(newBookmarkThings)
@@ -239,12 +241,42 @@ const filterSubmitListener = function() {
 
 };
 
-const itemExpandClickListener = function() {
+const visitLinkListener = function() {
 
 };
 
-const itemDeleteClickListener = function() {
+const getItemIdFromElement = function(item) {
+  return $(item).closest('li').data('itemId');
+};
 
+
+const itemExpandClickListener = function() {
+  $('main').on('click', '.button-item', event => {
+    console.log('clicked');
+    event.preventDefault();
+    const id = getItemIdFromElement(event.currentTarget);
+    const bookmark = store.findById(id);
+    console.log(bookmark);
+    bookmark.expanded = !bookmark.expanded;
+    render();
+  });
+};
+
+const itemDeleteClickListener = function() {
+  // like in `handleItemCheckClicked`, we use event delegation
+  $('main').on('click', '.button-delete', event => {
+    event.preventDefault();
+    const id = getItemIdFromElement(event.currentTarget);
+    api.deleteItem(id)
+      .then(() => {
+        store.findAndDelete(id);
+        render();
+      })
+      .catch((err) => {
+        store.setError(err.message);
+        render();
+      });
+  });
 };
 
 const cancelFormClickListener = function() {
@@ -272,6 +304,7 @@ const bindEventListeners = function() {
   itemExpandClickListener();
   itemDeleteClickListener();
   cancelFormClickListener();
+  visitLinkListener();
   handleErrorExitClick();
 };
 

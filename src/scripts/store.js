@@ -12,6 +12,7 @@ function findById(id) {
 }
 
 function addBookmark(bookmark) {
+  bookmark.expanded = false;
   this.bookmarks.push(bookmark);
 }
 
