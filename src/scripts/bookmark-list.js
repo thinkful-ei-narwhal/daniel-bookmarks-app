@@ -24,8 +24,9 @@ function maxToMin(a, b) {
 }
 
 function aToZ(a, b) {
-  const titleA = a.title[0].toUpperCase();
-  const titleB = b.title[0].toUpperCase();
+  const titleA = a.title;
+  const titleB = b.title;
+  console.log(titleA);
   if (titleA < titleB) {
     return -1;
   }
@@ -38,8 +39,8 @@ function aToZ(a, b) {
 }
 
 function zToA(a, b) {
-  const titleA = a.title[0].toUpperCase();
-  const titleB = b.title[0].toUpperCase();
+  const titleA = a.title;
+  const titleB = b.title;
   if (titleA < titleB) {
     return 1;
   }
@@ -105,7 +106,7 @@ const generateBookmarkElement = function(bookmark) { // takes a bookmark object
 
 const generateBookmarkItemsString = function(bookmarkList) {
   // sort BEFORE making the strings!
-
+  console.log(store.filter);
   if (store.filter === 0) {
     bookmarkList.sort(minToMax);
   } else if (store.filter === 1) {
@@ -181,8 +182,9 @@ const formRender = function() {
 
 const render = function() {
   errorRender();
+  console.log(store.filter);
   if (!store.adding) {
-    let bookmarks = [...store.bookmarks];
+    const bookmarks = [...store.bookmarks];
     // make a string for the menu stuff
     const menuString = generateMenuButtons();
     // make a string for bookmark list
