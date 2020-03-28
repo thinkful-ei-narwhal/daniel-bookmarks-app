@@ -8,5 +8,6 @@ To run the app, run `npm start`.
 
 To build, run `npm run build`.
 
-Currently missing: Filter, Site Link functionality
-Planned: the above, Sliding Features for html elements? Changing some of the elements.
+Currently missing: Possible Update functionality?  Would need to include textareas that have the store.desc as the default value or something.  Should match everything needed for the project.
+
+Planned: Update Functionality, css fixes.  Do we really need a live site?
