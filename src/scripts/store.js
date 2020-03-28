@@ -25,8 +25,36 @@ function findAndDelete(id) {
   this.bookmarks = this.bookmarks.filter(item => item.id !== id);
 }
 
-function applyFilter(filter) {
-  this.filter = filter;
+function sortByFilter(number) {
+  if (number === 0) {
+    return this.bookmarks.sort((a, b) => a.rating - b.rating);
+  } if (number === 1) {
+    return this.bookmarks.sort((a, b) => b.rating - a.rating);
+  } if (number === 2) {
+    return this.bookmarks.sort(function(a, b) {
+      const nameA = a.title.toUpperCase();
+      const nameB = b.title.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  } if (number === 3) {
+    return this.bookmarks.sort(function(a, b) {
+      let nameA = a.title.toUpperCase();
+      let nameB = b.title.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return -1;
+      }
+      return 0;
+    });
+  }
 }
 
 
@@ -39,6 +67,6 @@ export default {
   findById,
   addBookmark,
   findAndDelete,
-  applyFilter,
+  sortByFilter,
   findAndUpdate,
 };

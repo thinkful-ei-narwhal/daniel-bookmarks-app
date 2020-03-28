@@ -20,7 +20,7 @@ function minToMax(a, b) {
 }
 
 function maxToMin(a, b) {
-  return minToMax(a, b).reverse;
+  return b.rating - a.rating;
 }
 
 function aToZ(a, b) {
@@ -105,19 +105,6 @@ const generateBookmarkElement = function(bookmark) { // takes a bookmark object
 };
 
 const generateBookmarkItemsString = function(bookmarkList) {
-  // sort BEFORE making the strings!
-  console.log(store.filter);
-  if (store.filter === 0) {
-    bookmarkList.sort(minToMax);
-  } else if (store.filter === 1) {
-    bookmarkList.sort(maxToMin);
-  } else if (store.filter === 2) {
-    bookmarkList.sort(aToZ);
-  } else if (store.filter === 3) {
-    bookmarkList.sort(zToA);
-  }
-
-  console.log(bookmarkList);
 
   const items = bookmarkList.map(bookmark => generateBookmarkElement(bookmark));
 
@@ -182,9 +169,11 @@ const formRender = function() {
 
 const render = function() {
   errorRender();
-  console.log(store.filter);
+  store.sortByFilter(store.filter);
   if (!store.adding) {
     const bookmarks = [...store.bookmarks];
+    
+
     // make a string for the menu stuff
     const menuString = generateMenuButtons();
     // make a string for bookmark list
@@ -193,11 +182,11 @@ const render = function() {
     const fullString = `${menuString} ${bookmarkListItemsString}`;
     // insert that HTML into the DOM
     $('main').html(fullString);
+    $('#select-filter').val(store.filter);
   } else {
     const fullString = formRender();
     $('main').html(fullString);
   }
-  
 };
 
 
@@ -247,7 +236,8 @@ const newFormClickListener = function() {
 const filterSubmitListener = function() {
   $('main').on('change', '#select-filter', function () {
     console.log('changed');
-    const filterVal = $('option:selected').val();
+    let filterVal = $('option:selected').val();
+    filterVal = Number(filterVal);
     store.filter = filterVal;
     render();
   });
