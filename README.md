@@ -1,7 +1,5 @@
 # Daniel-Bookmarks-App
 
-Live Page: https://thinkful-ei-narwhal.github.io/daniel-bookmarks-app/
-
 Repository: https://github.com/thinkful-ei-narwhal/daniel-bookmarks-app
 
 First, clone the repository.  Then, run `npm install`.
