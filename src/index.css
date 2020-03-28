@@ -4,6 +4,12 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-self: center;
+  flex: 1;
   width: 75%;
   margin: auto;
   color: rgb(95, 95, 95);
@@ -191,8 +197,10 @@ textarea {
 .buttons-menus {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  flex: 1;
 }
 
 .fix {
@@ -202,6 +210,7 @@ textarea {
   flex-direction: column;
   justify-content: space-evenly;
   justify-self: center;
+  justify-items: center;
 }
 
 select {
@@ -277,6 +286,7 @@ fieldset {
 }
 
 .button-delete {
+  margin-left: 5px;
   border-radius: 4px;
   color: white;
   background-color: rgb(226, 96, 96);
@@ -286,75 +296,83 @@ fieldset {
   border: 1px solid black;
   color: rgb(128, 52, 52);
   background-color: pink;
+  transition: 0.25s;
+}
+
+a {
+  color: rgb(95, 95, 95);
+  background-color: rgb(238, 249, 253);
+  font-size: 14px;
+  text-decoration: none;
+  padding: 2px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+}
+
+a:hover {
+  color: white;
+  text-shadow: 1px 1px black;
+  background-color: rgb(153, 153, 153);
+  transition: 0.25s;
+}
+
+span[class^='rating']:hover {
+  text-shadow: 1px 1px rgb(95, 95, 95);
+  color: gold;
+  transition: 0.25s;
 }
 
 /* Screen Adjustments */
 
 @media (min-width: 700px) { /* Medium Screen */
+  body {
+    margin-top: 20px;
+    width: 85%;
+  }
   
+  #bookmark-url, #bookmark-title { 
+    width: 300px;
+  }
+
+  textarea {
+    height: 200px;
+    width: 350px;
+  }
+
+  .button-item {
+    width: 400px;
+    height: 45px;
+    font-size: 22px;
+  }
+
+  .description-container {
+    width: 400px;
+  }
 }
 
 @media (min-width: 1024px) { /* Large Screen */
+  body {
+    margin-top: 30px;
+    width: 95%;
+  }
   
-}
+  #bookmark-url, #bookmark-title { 
+    width: 400px;
+  }
 
-.fade-in {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  align-self: center;
-  animation: fadeIn ease .5s;
-  -webkit-animation: fadeIn ease .5s;
-  -moz-animation: fadeIn ease .5s;
-  -o-animation: fadeIn ease .5s;
-  -ms-animation: fadeIn ease 5.s;
-}
+  textarea {
+    height: 250px;
+    width: 450px;
+  }
 
-/* ------------------- */
+  .button-item {
+    width: 500px;
+    height: 55px;
+    font-size: 28px;
+  }
 
-@keyframes fadeIn {
-  0% {
-      opacity: 0;
-  }
-  100% {
-      opacity: 1;
-  }
-}
-
-@-moz-keyframes fadeIn {
-  0% {
-      opacity: 0;
-  }
-  100% {
-      opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-      opacity: 0;
-  }
-  100% {
-      opacity: 1;
-  }
-}
-
-@-o-keyframes fadeIn {
-  0% {
-      opacity: 0;
-  }
-  100% {
-      opacity: 1;
-  }
-}
-
-@-ms-keyframes fadeIn {
-  0% {
-      opacity: 0;
-  }
-  100% {
-      opacity: 1;
+  .description-container {
+    width: 500px;
   }
 }
 
@@ -382,16 +400,18 @@ fieldset {
   content: '★ ';
 }
 .rate > input:checked ~ label {
-  color: rgb(68, 236, 255);    
+  color: gold;    
 }
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-  color: rgb(68, 236, 255);  
+  color: gold;  
 }
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
-  color: rgb(43, 133, 143);
+  color: rgb(190, 162, 0);
 }
+
+/* ------------------- */

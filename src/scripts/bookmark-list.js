@@ -48,7 +48,7 @@ const generateBookmarkElement = function(bookmark) { // takes a bookmark object
         <div class="bookmark-item">
           <button type="button" class="button-item selected">${bookmark.title}</button>
             <div class="description-container">
-              <button type="button" class="link-button rating-${bookmark.rating}">Visit Site</button> 
+              <a href="${bookmark.url}" target="blank" class="button-link">Visit ${bookmark.title}!</a><span class="rating-${bookmark.rating}">   </span>
               <button type="button" class="button-delete">X</button>
               <div class="description">
                 <p>${bookmark.desc}</p>
