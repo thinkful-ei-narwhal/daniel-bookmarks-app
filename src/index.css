@@ -221,12 +221,14 @@ select {
 }
 
 .selected {
+  text-shadow: 1px 1px black;
   color: white;
-  background-color:rgb(111, 187, 197);
+  background-color:rgb(64, 233, 255);
   transition: 0.25s;
 }
 
 .selected:hover {
+  text-shadow: 1px 1px rgb(64, 233, 255);
   color: rgb(95, 95, 95);
 }
 
@@ -272,6 +274,18 @@ fieldset {
 .link-button:active{
   background-color:rgb(36, 229, 255);
   transition: 0.25s;
+}
+
+.button-delete {
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(226, 96, 96);
+}
+
+.button-delete:hover {
+  border: 1px solid black;
+  color: rgb(128, 52, 52);
+  background-color: pink;
 }
 
 /* Screen Adjustments */

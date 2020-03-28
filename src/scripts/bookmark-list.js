@@ -13,6 +13,45 @@ import store from './store';
 
 // go back, make the visit button an href and style it like a button
 
+// Filter functions
+
+function minToMax(a, b) {
+  return a.rating - b.rating;
+}
+
+function maxToMin(a, b) {
+  return minToMax(a, b).reverse;
+}
+
+function aToZ(a, b) {
+  const titleA = a.title[0].toUpperCase();
+  const titleB = b.title[0].toUpperCase();
+  if (titleA < titleB) {
+    return -1;
+  }
+  if (titleA > titleB) {
+    return 1;
+  }
+
+  // names must be equal
+  return 0;
+}
+
+function zToA(a, b) {
+  const titleA = a.title[0].toUpperCase();
+  const titleB = b.title[0].toUpperCase();
+  if (titleA < titleB) {
+    return 1;
+  }
+  if (titleA > titleB) {
+    return -1;
+  }
+
+  // names must be equal
+  return 0;
+}
+
+
 // Generator Functions ()
 
 const generateMenuButtons = function() {
@@ -67,42 +106,6 @@ const generateBookmarkElement = function(bookmark) { // takes a bookmark object
 const generateBookmarkItemsString = function(bookmarkList) {
   // sort BEFORE making the strings!
 
-  function minToMax(a, b) {
-    return a.rating - b.rating;
-  }
-
-  function maxToMin(a, b) {
-    return b.rating - a.rating;
-  }
-
-  function aToZ(a, b) {
-    const titleA = a.title.toUpperCase();
-    const titleB = b.title.toUpperCase();
-    if (titleA < titleB) {
-      return -1;
-    }
-    if (titleA > titleB) {
-      return 1;
-    }
-  
-    // names must be equal
-    return 0;
-  }
-
-  function zToA(a, b) {
-    const titleA = a.title.toUpperCase();
-    const titleB = b.title.toUpperCase();
-    if (titleA < titleB) {
-      return 1;
-    }
-    if (titleA > titleB) {
-      return -1;
-    }
-  
-    // names must be equal
-    return 0;
-  }
-
   if (store.filter === 0) {
     bookmarkList.sort(minToMax);
   } else if (store.filter === 1) {
@@ -112,6 +115,8 @@ const generateBookmarkItemsString = function(bookmarkList) {
   } else if (store.filter === 3) {
     bookmarkList.sort(zToA);
   }
+
+  console.log(bookmarkList);
 
   const items = bookmarkList.map(bookmark => generateBookmarkElement(bookmark));
 
@@ -168,7 +173,7 @@ const formRender = function() {
   </div>
   <textarea id="bookmark-description" placeholder="A description (optional)"></textarea><br>
   <div class="bottom-buttons">
-    <button type="button" class="cancel-button">Cancel</button>
+    <button type="button" class="cancel-button">Go Back</button>
     <input type="submit" class="submit-button" value="Submit">
   </div>
 </form>`;
@@ -238,13 +243,11 @@ const newFormClickListener = function() {
 };
 
 const filterSubmitListener = function() {
-  $('main').on('change', 'select', function (event) {
+  $('main').on('change', '#select-filter', function () {
     console.log('changed');
     const filterVal = $('option:selected').val();
-    console.log(filterVal);
     store.filter = filterVal;
     render();
-    
   });
 };
 
