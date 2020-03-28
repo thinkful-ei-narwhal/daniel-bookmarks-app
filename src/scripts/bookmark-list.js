@@ -2,55 +2,8 @@ import $ from 'jquery';
 import api from './api';
 import store from './store';
 
-// {
-//   id: 'x56w',
-//   title: 'Title 1',
-//   rating: 3,
-//   url: 'http://www.title1.com',
-//   description: 'lorem ipsum dolor sit',
-//   expanded: false
-// },
 
 // go back, make the visit button an href and style it like a button
-
-// Filter functions
-
-function minToMax(a, b) {
-  return a.rating - b.rating;
-}
-
-function maxToMin(a, b) {
-  return b.rating - a.rating;
-}
-
-function aToZ(a, b) {
-  const titleA = a.title;
-  const titleB = b.title;
-  console.log(titleA);
-  if (titleA < titleB) {
-    return -1;
-  }
-  if (titleA > titleB) {
-    return 1;
-  }
-
-  // names must be equal
-  return 0;
-}
-
-function zToA(a, b) {
-  const titleA = a.title;
-  const titleB = b.title;
-  if (titleA < titleB) {
-    return 1;
-  }
-  if (titleA > titleB) {
-    return -1;
-  }
-
-  // names must be equal
-  return 0;
-}
 
 
 // Generator Functions ()
@@ -67,10 +20,12 @@ const generateMenuButtons = function() {
             <div class="fix">
             <label for="select-filter">Filter By</label>
             <select id="select-filter">
-              <option value="0">Min Rating</option>
-              <option value="1">Max Rating</option>
+              <option value="0">Min to Max</option>
+              <option value="1">Max to Min</option>
               <option value="2">A - Z</option>
               <option value="3">Z - A</option>
+              <option value="4">Rating Above Selected</option>
+              <option value="5">Rating Below Selected</option>
               </select>
             </div>
           </fieldset>

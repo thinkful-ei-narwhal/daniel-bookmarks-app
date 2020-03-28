@@ -1,4 +1,5 @@
 const bookmarks = [];
+const bookmarksTemp = [];
 const adding = false;
 const filter = 0;
 const error = null;
@@ -27,10 +28,29 @@ function findAndDelete(id) {
 
 function sortByFilter(number) {
   if (number === 0) {
+    if (this.bookmarksTemp){
+      this.bookmarks = this.bookmarksTemp.sort((a, b) => a.rating - b.rating);
+    }
     return this.bookmarks.sort((a, b) => a.rating - b.rating);
   } if (number === 1) {
+    if (this.bookmarksTemp){
+      this.bookmarks = this.bookmarksTemp;
+    }
     return this.bookmarks.sort((a, b) => b.rating - a.rating);
   } if (number === 2) {
+    if (this.bookmarksTemp){
+      this.bookmarks = this.bookmarksTemp.sort(function(a, b) {
+        const nameA = a.title.toUpperCase();
+        const nameB = b.title.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+    }
     return this.bookmarks.sort(function(a, b) {
       const nameA = a.title.toUpperCase();
       const nameB = b.title.toUpperCase();
@@ -43,17 +63,44 @@ function sortByFilter(number) {
       return 0;
     });
   } if (number === 3) {
+    if (this.bookmarksTemp){
+      this.bookmarks = this.bookmarksTemp.sort(function(a, b) {
+        let nameA = a.title.toUpperCase();
+        let nameB = b.title.toUpperCase();
+        if (nameA < nameB) {
+          return 1;
+        }
+        if (nameA > nameB) {
+          return -1;
+        }
+        return 0;
+      });
+    }
     return this.bookmarks.sort(function(a, b) {
       let nameA = a.title.toUpperCase();
       let nameB = b.title.toUpperCase();
       if (nameA < nameB) {
-        return -1;
+        return 1;
       }
       if (nameA > nameB) {
         return -1;
       }
       return 0;
     });
+  } if (number === 4) {
+    this.bookmarksTemp = this.bookmarks;
+    const element = this.bookmarks.find(el => el.expanded === true);
+    if (element) {
+      this.bookmarks = this.bookmarks.filter(el => Number(el.rating) >= Number(element.rating));
+      return this.bookmarks;
+    }
+  } if (number === 5) {
+    this.bookmarksTemp = this.bookmarks;
+    const element = this.bookmarks.find(el => el.expanded === true);
+    if (element) {
+      this.bookmarks = this.bookmarks.filter(el => el.rating <= element.rating);
+      return this.bookmarks;
+    }
   }
 }
 
