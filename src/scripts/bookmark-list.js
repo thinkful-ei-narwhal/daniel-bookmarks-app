@@ -11,6 +11,7 @@ import store from './store';
 //   expanded: false
 // },
 
+// go back, make the visit button an href and style it like a button
 
 // Generator Functions ()
 
@@ -50,7 +51,7 @@ const generateBookmarkElement = function(bookmark) { // takes a bookmark object
     return `
       <li class="js-item-element" data-item-id="${bookmark.id}">
         <div class="bookmark-item">
-          <button type="button" class="button-item selected">${bookmark.title}/button>
+          <button type="button" class="button-item selected">${bookmark.title}</button>
             <div class="description-container">
               <button type="button" class="link-button rating-${bookmark.rating}">Visit Site</button> 
               <button type="button" class="button-delete">X</button>
@@ -67,11 +68,11 @@ const generateBookmarkItemsString = function(bookmarkList) {
   // sort BEFORE making the strings!
 
   function minToMax(a, b) {
-    return b.rating - a.rating;
+    return a.rating - b.rating;
   }
 
   function maxToMin(a, b) {
-    return a.rating - b.rating;
+    return b.rating - a.rating;
   }
 
   function aToZ(a, b) {
@@ -183,7 +184,6 @@ const render = function() {
     const bookmarkListItemsString = generateBookmarkItemsString(bookmarks);
     // now they have a baby
     const fullString = `${menuString} ${bookmarkListItemsString}`;
-    console.log(fullString);
     // insert that HTML into the DOM
     $('main').html(fullString);
   } else {
@@ -204,10 +204,10 @@ const createItemSubmitListener = function() {
   $('main').on('submit', '#bookmark-form', event => {
     event.preventDefault();
     
-    const url = $('#bookmark-form input[id=bookmark-url').val();
-    const title = $('#bookmark-form input[id=bookmark-title').val();
-    const rating = $('#bookmark-form input[name=bookmark-rating').val(); // is always 5...
-    const desc = $('#bookmark-form textarea[id=bookmark-description').val();
+    const url = $('#bookmark-form input[id=bookmark-url]').val();
+    const title = $('#bookmark-form input[id=bookmark-title]').val();
+    const rating = $('#bookmark-form input[name=bookmark-rating]:checked').val();
+    const desc = $('#bookmark-form textarea[id=bookmark-description]').val();
 
     const newBookmarkThings = {
       title,
@@ -238,7 +238,14 @@ const newFormClickListener = function() {
 };
 
 const filterSubmitListener = function() {
-
+  $('main').on('change', 'select', function (event) {
+    console.log('changed');
+    const filterVal = $('option:selected').val();
+    console.log(filterVal);
+    store.filter = filterVal;
+    render();
+    
+  });
 };
 
 const visitLinkListener = function() {
@@ -267,7 +274,7 @@ const itemDeleteClickListener = function() {
   $('main').on('click', '.button-delete', event => {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
-    api.deleteItem(id)
+    api.deleteBookmark(id)
       .then(() => {
         store.findAndDelete(id);
         render();
