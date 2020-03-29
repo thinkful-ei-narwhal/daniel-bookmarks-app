@@ -1,5 +1,3 @@
-import '../index.css';
-import $ from 'jquery';
 import api from './api';
 import bookmarkList from './bookmark-list';
 import store from './store';
