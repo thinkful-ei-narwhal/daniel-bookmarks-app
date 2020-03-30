@@ -1,8 +1,6 @@
-import '../index.css';
-import $ from 'jquery';
-import api from './api';
-import bookmarkList from './bookmark-list';
-import store from './store';
+import api from './api.js';
+import bookmarkList from './bookmark-list.js';
+import store from './store.js';
 
 const main = function() {
 

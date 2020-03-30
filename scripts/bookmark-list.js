@@ -1,6 +1,5 @@
-import $ from 'jquery';
-import api from './api';
-import store from './store';
+import api from './api.js';
+import store from './store.js';
 
 
 // go back, make the visit button an href and style it like a button
@@ -181,7 +180,6 @@ const createItemSubmitListener = function() {
 
 const newFormClickListener = function() {
   $('main').on('click', '.new-button', event => {
-    console.log('clicked!');
     event.preventDefault();
     store.adding = true;
     render();
@@ -190,7 +188,6 @@ const newFormClickListener = function() {
 
 const filterSubmitListener = function() {
   $('main').on('change', '#select-filter', function () {
-    console.log('changed');
     let filterVal = $('option:selected').val();
     filterVal = Number(filterVal);
     store.filter = filterVal;
@@ -209,11 +206,9 @@ const getItemIdFromElement = function(item) {
 
 const itemExpandClickListener = function() {
   $('main').on('click', '.button-item', event => {
-    console.log('clicked');
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
     const bookmark = store.findById(id);
-    console.log(bookmark);
     bookmark.expanded = !bookmark.expanded;
     render();
   });
@@ -238,7 +233,6 @@ const itemDeleteClickListener = function() {
 
 const cancelFormClickListener = function() {
   $('main').on('click', '.cancel-button', event => {
-    console.log('clicked!');
     event.preventDefault();
     store.adding = false;
     render();

@@ -24,7 +24,6 @@ const getBookmarks = function() {
 
 const createBookmark = function(item) {
   const newBookmark = JSON.stringify(item);
-  console.log(newBookmark);
   const options = {
     method: 'POST',
     headers: {'content-type': 'application/json'},
