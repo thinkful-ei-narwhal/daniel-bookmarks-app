@@ -25,6 +25,11 @@ const generateMenuButtons = function() {
               <option value="3">Z - A</option>
               <option value="4">Rating Above Selected</option>
               <option value="5">Rating Below Selected</option>
+              <option value="6">1 Star & Above</option>
+              <option value="7">2 Stars & Above</option>
+              <option value="8">3 Stars & Above</option>
+              <option value="9">4 Stars & Above</option>
+              <option value="10">5 Stars & Above</option>
               </select>
             </div>
           </fieldset>
@@ -102,7 +107,7 @@ const formRender = function() {
   <label for="bookmark-title">Title:</label><br>
   <input type="text" id="bookmark-title" name="bookmark-form" placeholder="Google"><br>
   <div class="rate">
-    <input type="radio" id="star5" name="bookmark-rating" value="5" />
+    <input type="radio" id="star5" name="bookmark-rating" value="5">
     <label for="star5" title="text">5 stars</label>
     <input type="radio" id="star4" name="bookmark-rating" value="4">
     <label for="star4" title="text">4 stars</label>
@@ -159,22 +164,28 @@ const createItemSubmitListener = function() {
     const rating = $('#bookmark-form input[name=bookmark-rating]:checked').val();
     const desc = $('#bookmark-form textarea[id=bookmark-description]').val();
 
-    const newBookmarkThings = {
-      title,
-      url,
-      desc,
-      rating,
-    };
+    if (!rating) {
+      store.setError('Rating Required');
+      render();
+    } else {
 
-    api.createBookmark(newBookmarkThings)
-      .then((newBookmark) => {
-        store.addBookmark(newBookmark);
-        render();
-      })
-      .catch((err) => {
-        store.setError(err.message);
-        render();
-      });
+      const newBookmarkThings = {
+        title,
+        url,
+        desc,
+        rating,
+      };
+
+      api.createBookmark(newBookmarkThings)
+        .then((newBookmark) => {
+          store.addBookmark(newBookmark);
+          render();
+        })
+        .catch((err) => {
+          store.setError(err.message);
+          render();
+        });
+    }
   });
 };
 

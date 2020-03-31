@@ -34,7 +34,7 @@ function sortByFilter(number) {
     return this.bookmarks.sort((a, b) => a.rating - b.rating);
   } if (number === 1) {
     if (this.bookmarksTemp){
-      this.bookmarks = this.bookmarksTemp;
+      this.bookmarks = this.bookmarksTemp.sort((a, b) => b.rating - a.rating);
     }
     return this.bookmarks.sort((a, b) => b.rating - a.rating);
   } if (number === 2) {
@@ -88,19 +88,60 @@ function sortByFilter(number) {
       return 0;
     });
   } if (number === 4) {
-    this.bookmarksTemp = this.bookmarks;
+    if (!this.bookmarksTemp){
+      this.bookmarksTemp = this.bookmarks;
+    }
+    this.bookmarks = this.bookmarksTemp;
     const element = this.bookmarks.find(el => el.expanded === true);
     if (element) {
       this.bookmarks = this.bookmarks.filter(el => Number(el.rating) >= Number(element.rating));
       return this.bookmarks;
     }
   } if (number === 5) {
-    this.bookmarksTemp = this.bookmarks;
+    if (!this.bookmarksTemp){
+      this.bookmarksTemp = this.bookmarks;
+    }
+    this.bookmarks = this.bookmarksTemp;
     const element = this.bookmarks.find(el => el.expanded === true);
     if (element) {
-      this.bookmarks = this.bookmarks.filter(el => el.rating <= element.rating);
+      this.bookmarks = this.bookmarks.filter(el => Number(el.rating) <= Number(element.rating));
       return this.bookmarks;
     }
+  } if (number === 6) {
+    if (!this.bookmarksTemp){
+      this.bookmarksTemp = this.bookmarks;
+    }
+    this.bookmarks = this.bookmarksTemp;
+    this.bookmarks = this.bookmarks.filter(el => Number(el.rating) >= 1);
+    return this.bookmarks;
+  } if (number === 7) {
+    if (!this.bookmarksTemp){
+      this.bookmarksTemp = this.bookmarks;
+    }
+    this.bookmarks = this.bookmarksTemp;
+    this.bookmarks = this.bookmarks.filter(el => Number(el.rating) >= 2);
+    return this.bookmarks;
+  } if (number === 8) {
+    if (!this.bookmarksTemp){
+      this.bookmarksTemp = this.bookmarks;
+    }
+    this.bookmarks = this.bookmarksTemp;
+    this.bookmarks = this.bookmarks.filter(el => Number(el.rating) >= 3);
+    return this.bookmarks;
+  } if (number === 9) {
+    if (!this.bookmarksTemp){
+      this.bookmarksTemp = this.bookmarks;
+    }
+    this.bookmarks = this.bookmarksTemp;
+    this.bookmarks = this.bookmarks.filter(el => Number(el.rating) >= 4);
+    return this.bookmarks;
+  } if (number === 10) {
+    if (!this.bookmarksTemp){
+      this.bookmarksTemp = this.bookmarks;
+    }
+    this.bookmarks = this.bookmarksTemp;
+    this.bookmarks = this.bookmarks.filter(el => Number(el.rating) >= 5);
+    return this.bookmarks;
   }
 }
 
