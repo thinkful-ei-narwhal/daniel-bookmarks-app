@@ -24,6 +24,7 @@ function findAndUpdate(id, newData) {
 
 function findAndDelete(id) {
   this.bookmarks = this.bookmarks.filter(item => item.id !== id);
+  this.bookmarksTemp = this.bookmarksTemp.filter(item => item.id !== id);
 }
 
 function sortByFilter(number) {

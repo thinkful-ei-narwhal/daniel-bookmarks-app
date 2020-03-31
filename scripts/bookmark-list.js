@@ -179,6 +179,7 @@ const createItemSubmitListener = function() {
       api.createBookmark(newBookmarkThings)
         .then((newBookmark) => {
           store.addBookmark(newBookmark);
+          store.adding = false;
           render();
         })
         .catch((err) => {
